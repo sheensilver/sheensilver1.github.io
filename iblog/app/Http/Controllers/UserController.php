@@ -22,6 +22,7 @@ class UserController extends Controller
     public function store(Request $request) {
         User::create([
             'name' =>$request->name,
+            'username' =>$request->username,
             'email' =>$request->email,
             'role' =>$request->role,
             'password' =>Hash::make($request->password),
@@ -31,10 +32,11 @@ class UserController extends Controller
     }
     public function edit($id) {
         $user = User::find($id);
-        return view('admin.users.create')->with(['user' => $user]);
+        return view('admin.user.edit')->with(['user' => $user]);
     }
     public function update(Request $request, $id) {
         User::where('id', $id)->update([
+            'username' =>$request->username,
             'name' =>$request->name,
             'email' =>$request->email,
             'role' =>$request->role,
