@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
 
 class UserController extends Controller
 {
@@ -22,9 +24,28 @@ class UserController extends Controller
             'name' =>$request->name,
             'email' =>$request->email,
             'role' =>$request->role,
-            'password' =>$request->password,
+            'password' =>Hash::make($request->password),
         ]);
  
         return redirect()->route('users.create');
-     }
+    }
+    public function edit($id) {
+        $user = User::find($id);
+        return view('admin.users.create')->with(['user' => $user]);
+    }
+    public function update(Request $request, $id) {
+        User::where('id', $id)->update([
+            'name' =>$request->name,
+            'email' =>$request->email,
+            'role' =>$request->role,
+            'password' =>Hash::make($request->password),
+        ]);
+ 
+        return redirect()->route('users.index');
+    }
+    public function delete( $id) {
+        User::where('id', $id)->delete();
+ 
+        return redirect()->route('users.index');
+    }
 }

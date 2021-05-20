@@ -51,12 +51,12 @@
                               @foreach($users as $key => $user)
                                 <td>{{ $key + 1 }}</td>
                                 <td>{{ $user->name }}</td>
-                                <td>{{ $user->user_name }}</td>
-                                <td>{{ $user->gmail }}</td>
+                                <td>{{ $user->username }}</td>
+                                <td>{{ $user->email }}</td>
                                 <td>{{ $user->role }}</td>
                                 <td> 0</td>
-                                <td><a href="{{ route('categories.edit', ['id' => $user->id]) }}" class="btn btn-outline-info">Edit</a></td>
-                                <td><a href="{{ route('categories.delete', ['id' => $user->id]) }}" class="btn btn-danger">Delete</a></td>
+                                <td><a href="{{ route('users.edit', ['id' => $user->id]) }}" class="btn btn-outline-info">Edit</a></td>
+                                <td><a href="{{ route('users.delete', ['id' => $user->id]) }}" class="btn btn-danger">Delete</a></td>
                               </tr>
                               @endforeach
                             </tbody>

@@ -1,7 +1,7 @@
 @extends('admin.layout.admin')
 
 @section('title')
-    Categories
+    Dashboard
 @endsection
 
 @section('content')

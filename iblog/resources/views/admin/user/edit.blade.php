@@ -1,42 +1,55 @@
 @extends('admin.layout.admin')
 
 @section('title')
-    Add new Category
+    Edit User
 @endsection
 
 @section('content')
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-@include('partials.content-header', ['name' => 'category', 'key' => 'Edit'])
-        <!-- /.content-header -->
+<div class="content-wrapper">
 
-        <!-- Main content -->
-        <div class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <form action ="{{route('categories.update', $category->id)}}" method="post">
-                        @csrf
-                        <div class="form-group">
-                          <label for="categoryName">Category name</label>
-                          <input type="text" class="form-control" id="categoryName" name ="name" placeholder="Enter category name" value = "{{$category->name}}">
-                          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                        </div>
+  @include('admin.partials.content-header', ['name' => 'User', 'key' => 'Add'])
 
-                        <div class="form-group">
-                            <label for="parentId">Parent Category</label>
-                            <select class="form-control" id="parentId" name = "parent_id">
-                              <option value="0">Select Parent Category</option>
-                              {{!! $htmlOptions !!}}
-                            </select>
-                          </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                      </form>
-                </div>
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12">
+          <form action ="{{route('users.store')}}" method="post">
+            @csrf
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="name" name ="name" placeholder="Enter name" value = "{{ $user->name }}">
+              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
-            <!-- /.row -->
-        </div><!-- /.container-fluid -->
+            <div class="form-group">
+              <label for="userName">Userame</label>
+              <input type="text" class="form-control" id="userName" name ="username" placeholder="Enter user name" value = "{{ $user->username }}">
+              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+              <label for="useremail">Email</label>
+              <input type="text" class="form-control" id="useremail" name ="email" placeholder="Enter user name" value = "{{ $user->email }}>
+              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password" name ="password" >
+              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+              <label for="role">Chooise User Role</label>
+              <select class="form-control" id="role" name = "role">
+                <option value="{{ $user->role }}">{{ $user->role }}</option>
+                <option value="user">User</option>
+                <option value="writer">Writer</option>
+                <option value="manager">Manager</option>
+                <option value="admin">Admin</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+          </form>
         </div>
-        <!-- /.content -->
+      </div>
     </div>
+  </div>
+</div>
 @endsection

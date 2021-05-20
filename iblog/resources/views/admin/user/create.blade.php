@@ -1,7 +1,7 @@
 @extends('admin.layout.admin')
 
 @section('title')
-    Add new Category
+    Add new user
 @endsection
 
 @section('content')
@@ -16,18 +16,18 @@
           <form action ="{{route('users.store')}}" method="post">
             @csrf
             <div class="form-group">
-              <label for="categoryName">Name</label>
-              <input type="text" class="form-control" id="categoryName" name ="name" placeholder="Enter category name">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="name" name ="name" placeholder="Enter name">
               <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
             <div class="form-group">
-              <label for="categoryName">Userame</label>
-              <input type="text" class="form-control" id="categoryName" name ="username" placeholder="Enter category name">
+              <label for="userName">Userame</label>
+              <input type="text" class="form-control" id="userName" name ="username" placeholder="Enter user name">
               <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
             <div class="form-group">
               <label for="useremail">Email</label>
-              <input type="text" class="form-control" id="useremail" name ="email" placeholder="Enter category name">
+              <input type="text" class="form-control" id="useremail" name ="email" placeholder="Enter user name">
               <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
             <div class="form-group">
