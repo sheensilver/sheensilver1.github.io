@@ -20,7 +20,7 @@ Route::get('/', function (){
     return view('welcome');
 });
 
-Route::group(['prefix'=>'admin'], function() {
+Route::prefix('admin')->middleware(['auth'])->group( function() {
 
     Route::get('/', function () {
         return view('admin.index');
@@ -41,7 +41,6 @@ Route::group(['prefix'=>'admin'], function() {
     Route::get('/users/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
     Route::post('/users/update/{id}', [UserController::class, 'update'])->name('users.update');
     Route::get('/users/delete/{id}', [UserController::class, 'delete'])->name('users.delete');
-
 
 });
 
