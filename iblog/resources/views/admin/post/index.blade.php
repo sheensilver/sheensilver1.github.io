@@ -58,7 +58,7 @@
                                   @endforeach
                                 </td>
                                 <td><a href="{{ route('posts.edit', $post) }}" class="btn btn-outline-info">Edit</a></td>
-                                <td><a href="{{ route('posts.destroy', $post) }}" class="btn btn-danger">Delete</a></td>
+                                <td><a href="{{ route('posts.delete', $post->id) }}" class="btn btn-danger">Delete</a></td>
                               </tr>
                               @endforeach
                             </tbody>

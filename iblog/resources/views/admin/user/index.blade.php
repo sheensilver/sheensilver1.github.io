@@ -54,7 +54,7 @@
                                 <td>{{ $user->username }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->role }}</td>
-                                <td> 0</td>
+                                <td> {{ $user->posts->count() }} </td>
                                 <td><a href="{{ route('users.edit', ['id' => $user->id]) }}" class="btn btn-outline-info">Edit</a></td>
                                 <td><a href="{{ route('users.delete', ['id' => $user->id]) }}" class="btn btn-danger">Delete</a></td>
                               </tr>

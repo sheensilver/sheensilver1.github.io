@@ -35,13 +35,15 @@
               </script>
             </div>
               <div class="form-group">
-                <label for="categoryId">Parent Category</label>
-                <select class="form-control" id="categoryId" name = "category">
-                  <option value="0">Select Parent Category</option>
+                <label>Chooise Category</label>
+                
                   @foreach( $categories as $category )
-                  <option value="{{ $category->id }}">{{ $category->name }}</option>
+                  <div class="form-check">
+                    <input class = "form-check-input" type="checkbox" name="categories[]" value="{{ $category->id }}" />
+                    <label class="form-check-label">{{$category->name}}</label>
+                  </div>
                   @endforeach
-                </select>
+
               </div>
 
             <button type="submit" class="btn btn-primary">Create</button>

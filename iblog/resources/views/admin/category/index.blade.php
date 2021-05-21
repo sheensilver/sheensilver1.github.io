@@ -42,6 +42,7 @@
                                 <th>slug</th>
                                 <th>date</th>
                                 <th>edit</th>
+                                <th>posts</th>
                                 <th>delete</th>
                               </tr>
                             </thead>
@@ -51,6 +52,7 @@
                                 <td>{{ $category->name }}</td>
                                 <td>{{ $category->slug }}</td>
                                 <td>{{ $category->updated_at }}</td>
+                                <td>{{ $category->posts->count() }}</td>
                                 <td><a href="{{ route('categories.edit', ['id' => $category->id]) }}" class="btn btn-outline-info">Edit</a></td>
                                 <td><a href="{{ route('categories.delete', ['id' => $category->id]) }}" class="btn btn-danger">Delete</a></td>
                               </tr>

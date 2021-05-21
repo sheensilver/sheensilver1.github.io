@@ -21,7 +21,7 @@ class CreatePostsTable extends Migration
             $table->string('description')->nullable();
             $table->string('image')->nullable();
             $table->string('views')->default(0);
-            $table->integer('uer_id')->default(1);
+            $table->integer('user_id')->default(1);
             $table->timestamps();
         });
     }

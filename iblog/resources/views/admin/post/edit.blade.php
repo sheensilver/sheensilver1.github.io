@@ -35,6 +35,23 @@
                   });
               </script>
             </div>
+            <div class="form-group">
+              <h2>Chooise Category</h2>
+              <div class = "flex">
+                @foreach( $categories as $category )
+                <div class="form-group">
+                  <input type="checkbox" name="categories[]" value="{{ $category->id }}" 
+                  @foreach($post->categories as $post_category)
+                    @if($post_category->id == $category->id)
+                      checked
+                      @break
+                    @endif
+                  @endforeach
+                   />{{$category->name}}
+                </div>
+                @endforeach
+              </div>
+            </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
           

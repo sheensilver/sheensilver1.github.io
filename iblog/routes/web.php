@@ -34,13 +34,17 @@ Route::prefix('admin')->middleware(['auth'])->group( function() {
     Route::get('/categories/delete/{id}', [CategoryController::class, 'delete'])->name('categories.delete');
 
     Route::resource('posts', PostController::class);
+    Route::get('/posts/detele/{id}', [PostController::class, 'destroy'])->name('posts.delete');
 
-    Route::get('/users/index', [UserController::class, 'index'])->name('users.index');
-    Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
-    Route::post('/users/srore', [UserController::class, 'store'])->name('users.store');
-    Route::get('/users/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
-    Route::post('/users/update/{id}', [UserController::class, 'update'])->name('users.update');
-    Route::get('/users/delete/{id}', [UserController::class, 'delete'])->name('users.delete');
+    Route::prefix('users')->middleware(['role:admin,manager'])->group( function() {
+        Route::get('/index', [UserController::class, 'index'])->name('users.index');
+        Route::get('/create', [UserController::class, 'create'])->name('users.create');
+        Route::post('/srore', [UserController::class, 'store'])->name('users.store');
+        Route::get('/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
+        Route::post('/update/{id}', [UserController::class, 'update'])->name('users.update');
+        Route::get('/delete/{id}', [UserController::class, 'delete'])->name('users.delete');
+    });
+    
 
 });
 

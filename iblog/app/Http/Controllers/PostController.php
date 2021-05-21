@@ -7,10 +7,23 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+
 
 
 class PostController extends Controller
 {
+
+    /**
+     * Create the controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Post::class, 'post');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -44,17 +57,26 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        $user_id = Auth::id();
         Post::create([
             'title' => $request->title,
-            'slug' =>Str::slug($request->title),
+            'slug' => Str::slug($request->title),
             'content' =>$request->content,
+            'user_id' => $user_id
         ]);
+        
         $post = Post::latest()->first();
-        DB::table('categories_posts')->insert([
-            'post_id' => $post->id,
-            'category_id' => $request->category,
-        ]);
+
+        $categories = $request->categories;
+
+        foreach( $categories as $category ) {
+            DB::table('categories_posts')->insert([
+                'post_id' => $post->id,
+                'category_id' => $category
+            ]);
+        }
+       
         return redirect()->route('posts.index');
     }
 
@@ -77,7 +99,10 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('admin.post.edit')->with(['post' => $post]);
+        $categories = Category::all();
+        return view('admin.post.edit')
+                ->with(['post' => $post])
+                ->with(['categories' => $categories]);
     }
 
     /**
@@ -95,6 +120,17 @@ class PostController extends Controller
             'slug' =>Str::slug($request->title),
             'content' =>$request->content,
         ]);
+
+        DB::table('categories_posts')->where('post_id', $post->id )->delete();
+
+        $categories = $posts->categories;
+
+        foreach( $categories as $category ) {
+            DB::table('categories_posts')->insert([
+                'post_id' => $post->id,
+                'category_id' => $category
+            ]);
+        }
         return redirect()->route('posts.index');
     }
 
@@ -104,7 +140,7 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy( $id)
     {
         Post::where('id', $id)->delete();
 
